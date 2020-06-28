@@ -4,7 +4,8 @@ MAINTAINER Conor Devine <conorjdevine@gmail.com>
 RUN apk update \
 	&& apk add nodejs=12.15.0-r1 \
 	&& apk add npm \
-	&& apk add inotify-tools
+	&& apk add inotify-tools \
+	&& apk add chromium-chromedriver
 
 ARG APP_USER=appuser
 ARG APP_GROUP=appgroup
@@ -15,6 +16,8 @@ RUN addgroup -g $APP_GROUP_ID -S $APP_GROUP && \
 	adduser -S -s /sbin/nologin -u $APP_USER_ID -G $APP_GROUP $APP_USER && \
 	mkdir /app && \
 	chown $APP_USER:$APP_GROUP /app
+
+ENV SECRET_SALT 3gkSwtOPrjN8+2iwAZUATjQ0x7YixwHf
 
 WORKDIR /app
 USER $APP_USER
